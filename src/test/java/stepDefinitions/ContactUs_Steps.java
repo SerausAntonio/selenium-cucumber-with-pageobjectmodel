@@ -8,43 +8,49 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
 import pageObjects.Base_PO;
+import pageObjects.ContactUs_PO;
 
-import static drivers.DriverFactory.getDriver;
-
-public class Contact_Us_Steps extends Base_PO {
+public class ContactUs_Steps extends Base_PO {
     private WebDriver driver= getDriver();
+
+    private ContactUs_PO contactUs_PO;
+
+    public ContactUs_Steps(ContactUs_PO contactUs_PO){
+        this.contactUs_PO = contactUs_PO;
+    }
 
     @Given("I access the webdriver university contact us page")
     public void iAccessTheWebdriverUniversityContactUsPage() {
 
-        navigateTo_URL("https://webdriveruniversity.com/Contact-Us/contactus.html");
-        By pageTitle = By.xpath("//*[@class='section_header']");
-        String expectedPageTitle = "CONTACT US";
-        String actualPageTitle = driver.findElement(pageTitle).getText();
-        Assert.assertEquals(actualPageTitle,expectedPageTitle);
+        contactUs_PO.navigateTo_WebDriverUniversity_ContactUs_Page();
+
     }
 
     @When("I enter a unique firstname")
     public void iEnterAUniqueFirstname() {
-         sendKeys(By.name("first_name"),"Joice");
+          contactUs_PO.setFirstName("Joice");
     }
     @And("I enter a unique lastname")
     public void iEnterAUniqueLastname() {
-       sendKeys(By.name("last_name"),"Sloan");
+       contactUs_PO.setLastName("Sloan");
     }
+
     @And("I enter a unique email adress")
     public void iEnterAUniqueEmailAdress() {
-        sendKeys(By.name("email"),"joice.sloan@gmail.com");
+        contactUs_PO.setEmailAdress("joice.sloan@gmail.com");
     }
+
     @And("I add a unique comment")
     public void iAddAUniqueComment() {
-        sendKeys(By.name("message"),"this is a message");
+
+        contactUs_PO.setMessage("this is a message");
     }
 
     @And("I click on the submit button")
     public void iClickOnTheSubmitButton() {
-       waitForWebElementAndClick(By.xpath("//input[@type='submit']"));
+         contactUs_PO.clickOnSummitButton();
     }
+
     @Then("I should be presented with a successful contact us submission message")
     public void iShouldBePresentedWithASuccessfulContactUsSubmissionMessage() {
         By reply = By.id("contact_reply");
