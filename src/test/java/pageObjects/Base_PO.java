@@ -59,5 +59,16 @@ public class Base_PO {
         String text = getDriver().switchTo().alert().getText();
         Assert.assertEquals(text, validationMessage);
     }
+    public void waitForMessage(By by){
+        WebDriverWait wait = new WebDriverWait(getDriver(),Duration.ofSeconds(15));
+        wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(by));
+      }
+    public void waitForMessage(WebElement element){
+        WebDriverWait wait = new WebDriverWait(getDriver(),Duration.ofSeconds(15));
+        wait.until(ExpectedConditions.visibilityOf(element));
+        String expectedReply = "Thank You for your Message!";
+        Assert.assertEquals(element.getText(),expectedReply);
+
+    }
 }
 

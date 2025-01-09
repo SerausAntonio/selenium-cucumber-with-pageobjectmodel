@@ -21,9 +21,7 @@ public class ContactUs_Steps extends Base_PO {
 
     @Given("I access the webdriver university contact us page")
     public void iAccessTheWebdriverUniversityContactUsPage() {
-
         contactUs_PO.navigateTo_WebDriverUniversity_ContactUs_Page();
-
     }
 
     @When("I enter a unique firstname")
@@ -34,52 +32,41 @@ public class ContactUs_Steps extends Base_PO {
     public void iEnterAUniqueLastname() {
        contactUs_PO.setLastName("Sloan");
     }
-
     @And("I enter a unique email adress")
     public void iEnterAUniqueEmailAdress() {
         contactUs_PO.setEmailAdress("joice.sloan@gmail.com");
     }
-
     @And("I add a unique comment")
     public void iAddAUniqueComment() {
-
         contactUs_PO.setMessage("this is a message");
     }
-
     @And("I click on the submit button")
     public void iClickOnTheSubmitButton() {
          contactUs_PO.clickOnSummitButton();
     }
-
     @Then("I should be presented with a successful contact us submission message")
     public void iShouldBePresentedWithASuccessfulContactUsSubmissionMessage() {
-        By reply = By.id("contact_reply");
-        String expectedReply = "Thank You for your Message!";
-        String actualReply = driver.findElement(reply).getText();
-        Assert.assertEquals(actualReply,expectedReply);
+        contactUs_PO.validate_Successful_SubmissionMessage_text();
     }
-
     @When("I enter a specific firstname {string}")
     public void iEnterASpecificFirstname(String firstName) {
-        sendKeys(By.name("first_name"),firstName);
+        contactUs_PO.setFirstName(firstName);
 
     }
 
     @And("I enter a specific lastname {string}")
     public void iEnterASpecificLastname(String lastName) {
-        sendKeys(By.name("last_name"),lastName);
+        contactUs_PO.setLastName(lastName);
 
     }
 
     @And("I enter a specific email adress {string}")
     public void iEnterASpecificEmailAdress(String email) {
-        sendKeys(By.name("email"),email);
-
+        contactUs_PO.setEmailAdress(email);
     }
 
     @And("I add a specific comment {string}")
     public void iAddASpecificComment(String comment) {
-        sendKeys(By.name("message"),comment);
-
+          contactUs_PO.setMessage(comment);
     }
 }

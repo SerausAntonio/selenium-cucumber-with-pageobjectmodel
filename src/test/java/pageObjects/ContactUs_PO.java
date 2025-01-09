@@ -25,23 +25,28 @@ public class ContactUs_PO extends Base_PO{
    private @FindBy(xpath="//input[@type='submit']")
     WebElement submitButton;
 
-     public void navigateTo_WebDriverUniversity_ContactUs_Page(){
+   private @FindBy(id="contact_reply")
+    WebElement contactReplyTxtField;
+   public void navigateTo_WebDriverUniversity_ContactUs_Page(){
         navigateTo_URL("https://webdriveruniversity.com/Contact-Us/contactus.html");
     }
-
-    public void setFirstName(String firstname){
+   public void setFirstName(String firstname){
          firstnameTxtField.sendKeys(firstname);
     }
-    public void setLastName(String lastname){
+   public void setLastName(String lastname){
         lastnameTxtField.sendKeys(lastname);
     }
-    public void setEmailAdress(String email){
+   public void setEmailAdress(String email){
         emailTxtField.sendKeys(email);
     }
-    public void setMessage(String message){
+   public void setMessage(String message){
         messageTxtField.sendKeys(message);
     }
-    public void clickOnSummitButton(){
+   public void clickOnSummitButton(){
          submitButton.click();
+    }
+    public void validate_Successful_SubmissionMessage_text(){
+        System.out.println("Ik ben hier");
+        waitForMessage(contactReplyTxtField);
     }
 }
